@@ -1,0 +1,49 @@
+import React, { useState, useEffect } from 'react';
+
+import { NavLink, Route, Redirect } from 'react-router-dom';
+import '../../styles/UserControl.scss';
+
+import Navigation from '../../components/Navigations/NavWithBanner';
+import Profile from '../../components/User/Profile';
+import Orders from '../../components/User/Orders/Orders';
+import Deactivate from './Deactivate';
+
+function UserProfile(){
+    const [redirect, setRedirect] = useState(null);
+    useEffect(()=>{
+        if(!localStorage.TOKEN){
+            setRedirect(<Redirect to="/"/>)
+        }
+    }, []);
+    return(
+        <div className="user-profile">
+            {redirect}
+            <div className="main-nav-bar" style={{background:"#990328",marginBottom:"20px"}}>
+                <Navigation />
+            </div>
+            <div className="user-profile-container">
+                <div className="user-profile-leftnav">
+                  <ul>
+                    <li>
+                        <NavLink exact activeStyle={{color:"#990328"}} to="/user-profile">Profile</NavLink>
+                    </li>
+                    <li>
+                        <NavLink activeStyle={{color:"#990328"}} to="/user-profile/deactivate">Deactivate Account</NavLink>
+                    </li>
+                    <li>
+                        <NavLink activeStyle={{color:"#990328"}} to="/user-profile/orders">Orders</NavLink>
+                    </li>
+                 </ul>
+                </div>
+                <div className="user-profile-content">
+                    <Route path="/user-profile" exact component={Profile}/>
+                    <Route path="/user-profile/deactivate" exact component={Deactivate}/>
+                    <Route path="/user-profile/orders" component={Orders}/>
+                </div>
+                
+            </div>
+        </div>
+    );
+};
+
+export default UserProfile;

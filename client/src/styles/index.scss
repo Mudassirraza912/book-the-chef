@@ -1,0 +1,18 @@
+@import './base.scss';
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+}
+.theme-button {
+    background: white;
+    color: $primary-background-color;
+    border:1px solid  $primary-background-color;
+}
+.order-info {
+    width: 80%;
+}
+.order-help-container {
+    width: 20%;
+    margin-block-start: 40px;
+}
